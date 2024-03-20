@@ -1,15 +1,15 @@
-
+import { LOGO_URL } from "../utils/constant";
 
 const Header = ()=>{
     return (
         <div className="header" >
             <div className="logo-container">
-                <img className="logo" src="https://s3.amazonaws.com/ionic-marketplace/food-ordering-restaurant-delivery-app/icon.png" alt="" />
+                <img className="logo" src={LOGO_URL} alt="" />
             </div>
             <div className="nav-items">
                 <ul>
                     <li>Home</li>
-                    <li>About</li>
+                    <li>About</li> 
                     <li>Contact</li>
                     <li>Cart</li>
                 </ul>

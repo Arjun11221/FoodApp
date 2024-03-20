@@ -27,6 +27,7 @@
 }
 
 .search{
+    
     padding: 10px;
 }
 
@@ -44,4 +45,8 @@
     display: flex;
     flex-wrap: wrap;
 
+}
+.fliter-btn{
+    margin: 10px;
+    cursor: pointer;
 }

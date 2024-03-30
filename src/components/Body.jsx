@@ -7,6 +7,7 @@ const Body = () => {
   const [searchCard, setSearchCard] = useState([]);
   const [search, setSearch] = useState("");
 
+
   useEffect(() => {
     fetchData();
   }, []);

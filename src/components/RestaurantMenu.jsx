@@ -7,7 +7,6 @@ const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
 
   const { resId } = useParams();
-  console.log(resId);
 
   useEffect(() => {
     fetchMenu();
@@ -15,18 +14,17 @@ const RestaurantMenu = () => {
 
   const fetchMenu = async () => {
     const data = await fetch(Menu_URL + resId);
-
     const json = await data.json();
     console.log(json);
-    setResInfo(json.data);
+    setResInfo(json);
   };
   if (resInfo === null) return <Shimmer />;
 
   const { name, costForTwoMessage, cuisines } =
-    resInfo?.cards[2]?.card?.card?.info;
+    resInfo?.data?.cards[2]?.card?.card?.info;
 
   const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
 
   return (
     <div>
@@ -37,7 +35,7 @@ const RestaurantMenu = () => {
       <ul>
         {itemCards?.map((res) => (
           <li key={res.card.info.id}>
-            {res.card.info.name} - ₹{res.card.info.price / 100}
+            {res.card.info.name} - ₹{res.card.info.price / 100 || res.card.info.defaultPrice/100 }
           </li>
         ))}
       </ul>

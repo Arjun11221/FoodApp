@@ -1,31 +1,47 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import { SWIGGY_URL } from "../utils/constant";
 
 const Body = () => {
-  const [filterRes, setFliterRes] = useState([]);
-  const [searchCard, setSearchCard] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [search, setSearch] = useState("");
-
+  const [isTopRated, setIsTopRated] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.65420&lng=77.23730&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(SWIGGY_URL);
     const json = await data.json();
-    setFliterRes(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setSearchCard(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    const restaurantsData =
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setRestaurants(restaurantsData);
+    setFilteredRestaurants(restaurantsData);
   };
 
-  return filterRes?.length === 0 ? (
+  const handleSearch = () => {
+    const filtered = restaurants.filter((res) =>
+      res.info.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredRestaurants(filtered);
+  };
+
+  const handleTopRated = () => {
+    const filtered = restaurants.filter((res) => res?.info?.avgRating > 4.2);
+    setFilteredRestaurants(filtered);
+    setIsTopRated(true);
+  };
+
+  const handleReset = () => {
+    setFilteredRestaurants(restaurants);
+    setIsTopRated(false);
+  };
+
+  return restaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -35,34 +51,23 @@ const Body = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button
-          onClick={() => {
-            const searchRes = filterRes.filter((res) =>
-              
-              res.info.name.toLowerCase().includes(search.toLowerCase())
-            );
-            setSearchCard(searchRes);
-          }}
-        >
-          Search
-        </button>
+        <button onClick={handleSearch}>Search</button>
       </div>
       <div className="btn">
-        <button
-          className="fliter-btn"
-          onClick={() => {
-            const filterRestaurant = filterRes.filter(
-              (res) => res?.info?.avgRating > 4.2
-            );
-            setFliterRes(filterRestaurant);
-          }}
-        >
+        <button className="fliter-btn" onClick={handleTopRated}>
           Top Rated Restaurant
         </button>
+        {isTopRated && (
+          <button className="reset-btn" onClick={handleReset}>
+            Reset
+          </button>
+        )}
       </div>
       <div className="res-container">
-        {searchCard?.map((res) => (
-          <RestaurantCard key={res.info.id} resData={res} />
+        {filteredRestaurants?.map((res) => (
+          <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
+            <RestaurantCard resData={res} />
+          </Link>
         ))}
       </div>
     </div>

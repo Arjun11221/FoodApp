@@ -1,32 +1,36 @@
 import React from "react";
 
-class UserClass extends React.Component{
+class UserClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        userInfo : {
+            name : "Dummy",
+            location : "Default",
+            avatar_url : "htp://dummy-photo.com"
+        },
+    };
+  }
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/Arjun11221");
+    const json = await data.json();
 
-    constructor (props){
-        super(props);
-        this.state = {
-            count : 0,
-            count1 : 2
-        }
-    }
+    this.setState({
+        userInfo:json
+    })
+  }
 
-    render(){
-        const {name , city} = this.props;
-        const {count} = this.state;
-        return <div>
-            <h1>Count : {count}</h1>
+  render() {
+    const {name, location , avatar_url} = this.state.userInfo
 
-            <button onClick={()=>{
-                this.setState({
-                    count :  this.state.count + 1
-                })
-            }}>Inc</button>
-
-            <h1>Name : {name}</h1>
-            <h2>City : {city}</h2>
-        </div>
-    }
-
+    return (
+      <div>
+        <h1>Name : {name}</h1>
+        <h2>City : {location}</h2>
+        <img src={avatar_url} alt="" />
+      </div>
+    );
+  }
 }
 
 export default UserClass;

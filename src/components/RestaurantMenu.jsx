@@ -5,7 +5,6 @@ import { Menu_URL } from "../utils/constant";
 
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
-
   const { resId } = useParams();
 
   useEffect(() => {
@@ -15,7 +14,6 @@ const RestaurantMenu = () => {
   const fetchMenu = async () => {
     const data = await fetch(Menu_URL + resId);
     const json = await data.json();
-    console.log(json);
     setResInfo(json);
   };
   if (resInfo === null) return <Shimmer />;

@@ -28,6 +28,7 @@ const Body = () => {
       res.info.name.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredRestaurants(filtered);
+    
   };
 
   const handleTopRated = () => {

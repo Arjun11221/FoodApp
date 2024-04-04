@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { SWIGGY_URL } from "../utils/constant";
+import useStatus from "../utils/useStatus";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -41,6 +42,14 @@ const Body = () => {
     setFilteredRestaurants(restaurants);
     setIsTopRated(false);
   };
+
+  const status = useStatus();
+
+  if(!status){
+    return(
+      <h2>You're Offline. Plz Check Your Internet Connection.</h2>
+    )
+  }
 
   return restaurants.length === 0 ? (
     <Shimmer />

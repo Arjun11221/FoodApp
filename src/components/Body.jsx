@@ -55,25 +55,29 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="search">
+     <div className="py-6 flex justify-start ">
+     <div className="mx-4 " >
         <input
+        className="p-2 w-96 border-2 border-gray-500 rounded"
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="px-4 py-3 mx-4 rounded-md bg-slate-300" onClick={handleSearch}>Search</button>
       </div>
-      <div className="btn">
-        <button className="fliter-btn" onClick={handleTopRated}>
+      <div className="">
+        <button className="px-4 py-3 mx-4 rounded-md bg-slate-300" onClick={handleTopRated}>
           Top Rated Restaurant
         </button>
         {isTopRated && (
-          <button className="reset-btn" onClick={handleReset}>
+          <button className="px-4 py-3 mx-4 rounded-md bg-slate-300" onClick={handleReset}>
             Reset
           </button>
         )}
       </div>
-      <div className="res-container">
+     </div>
+
+      <div className="flex flex-wrap">
         {filteredRestaurants?.map((res) => (
           <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
             <RestaurantCard resData={res} />

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { SWIGGY_URL } from "../utils/constant";
 import useStatus from "../utils/useStatus";
+import userContext from "../utils/userContext";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -45,6 +46,8 @@ const Body = () => {
 
   const status = useStatus();
 
+  const {name, setUserName  } = useContext(userContext);
+
   if(!status){
     return(
       <h2>You're Offline. Plz Check Your Internet Connection.</h2>
@@ -74,6 +77,15 @@ const Body = () => {
             Reset
           </button>
         )}
+      </div>
+      <div className="mx-3 " >
+        <label htmlFor="username">UserName : </label>
+        <input
+        className="p-2 w-60 border-2 border-gray-500 rounded"
+          type="text"
+          value={name}
+          onChange={(e)=>setUserName(e.target.value)}
+        />
       </div>
      </div>
 

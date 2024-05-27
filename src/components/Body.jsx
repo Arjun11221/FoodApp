@@ -57,6 +57,7 @@ const Body = () => {
   return restaurants.length === 0 ? (
     <Shimmer />
   ) : (
+    
     <div className="body">
      <div className="py-6 flex justify-start ">
      <div className="mx-4 " >

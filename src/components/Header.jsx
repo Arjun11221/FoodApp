@@ -16,9 +16,9 @@ const Header = () => {
   console.log(cartItems);
 
   return (
-    <div className="flex justify-between bg-amber-300">
-      <div className="py-4 ml-16">
-        <img className="w-32" src={LOGO_URL} alt="" />
+    <div className="flex justify-between bg-slate-300">
+      <div className="py-4 ml-20">
+        <img className="w-32 rounded-lg" src={LOGO_URL} alt="" />
       </div>
       <div className="items-center" >
         <ul className="flex m-10 p-4 ">

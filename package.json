@@ -2,7 +2,7 @@
   "name": "foodapp",
   "version": "1.0.0",
   "description": "I am creating a food App",
-  "main": "App.js",
+  
   "scripts": {
     "start": "parcel index.html --port 4000",
     "build": "parcel build index.html",

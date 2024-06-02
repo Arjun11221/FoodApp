@@ -16,10 +16,10 @@ const Header = () => {
   console.log(cartItems);
 
   return (
-    <div className="flex justify-between bg-slate-300">
-      <div className="py-4 ml-20">
+    <div className="flex justify-between  bg-slate-300">
+      <Link to="/" className="py-4 ml-20">
         <img className="w-32 rounded-lg" src={LOGO_URL} alt="" />
-      </div>
+      </Link>
       <div className="items-center" >
         <ul className="flex m-10 p-4 ">
           <li className="px-4 font-semibold text-xl " >Status : {status ? "Online" : "Offline"}</li>

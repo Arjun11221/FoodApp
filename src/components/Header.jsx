@@ -16,24 +16,24 @@ const Header = () => {
   console.log(cartItems);
 
   return (
-    <div className="flex justify-between  bg-slate-300">
-      <Link to="/" className="py-4 ml-20">
-        <img className="w-32 rounded-lg" src={LOGO_URL} alt="" />
+    <div className="flex flex-col lg:flex-row lg:justify-between bg-slate-300">
+      <Link to="/" className="py-4 ml-10 lg:ml-20">
+        <img className="w-16 lg:w-32 rounded-lg" src={LOGO_URL} alt="" />
       </Link>
-      <div className="items-center" >
-        <ul className="flex m-10 p-4 ">
-          <li className="px-4 font-semibold text-xl " >Status : {status ? "Online" : "Offline"}</li>
-          <li className="px-4 font-semibold text-xl" ><Link to='/' >Home</Link></li>
-          <li className="px-4 font-semibold text-xl" ><Link to="/about">About</Link></li>
-          <li className="px-4 font-semibold text-xl" ><Link to="/contact">Contact</Link></li>
-          <li className="px-4 font-semibold text-xl" ><Link to="/grocery">Grocery</Link></li>
-          <li className="px-4 font-semibold text-xl" ><Link to="/cart">Cart - ({cartItems.length} Items)</Link></li>
-          <li className="px-2 font-semibold text-xl" >
-            <button onClick={() => setBtnName((btnName=== "Login") ? "Logout" : "Login")}>
+      <div className="flex flex-col lg:flex-row lg:items-center">
+        <ul className="flex flex-col lg:flex-row lg:m-10 lg:p-4">
+          <li className="px-4 font-semibold text-xl">Status: {status ? "Online" : "Offline"}</li>
+          <li className="px-4 font-semibold text-xl"><Link to='/'>Home</Link></li>
+          <li className="px-4 font-semibold text-xl"><Link to="/about">About</Link></li>
+          <li className="px-4 font-semibold text-xl"><Link to="/contact">Contact</Link></li>
+          <li className="px-4 font-semibold text-xl"><Link to="/grocery">Grocery</Link></li>
+          <li className="px-4 font-semibold text-xl"><Link to="/cart">Cart - ({cartItems.length} Items)</Link></li>
+          <li className="px-2 font-semibold text-xl">
+            <button onClick={() => setBtnName((btnName === "Login") ? "Logout" : "Login")}>
               {btnName}
             </button>
           </li>
-          <li className="px-4 font-semibold text-xl" >{name}</li>
+          <li className="px-4 font-semibold text-xl">{name}</li>
         </ul>
       </div>
     </div>
